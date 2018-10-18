@@ -7,9 +7,9 @@ import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import initialState from './store/initialState';
+import rootReducer from './reducers';
 
 // configuracion del store
-const rootReducer = '';
 function configureStore(initialState) {
 	return createStore(rootReducer, initialState, applyMiddleware(thunk));
 }

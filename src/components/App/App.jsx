@@ -10,6 +10,7 @@ class App extends Component {
 			titulo: 's'
 		};
 	}
+
 	render() {
 		return <div className="inicio">{this.state.titulo}</div>;
 	}

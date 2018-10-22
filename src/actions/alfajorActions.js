@@ -13,4 +13,9 @@ export const ejemploAction = (uno) => {
 export const editarAlfajor = (alfajor) => ({
 	type: actionTypes.EDITAR,
 	alfajor
-})
+});
+
+export const borrarAlfajor = (alfajor) => ({
+	type: actionTypes.BORRAR,
+	alfajor
+});

@@ -20,22 +20,12 @@ export const unReductor = (state = initialState.redu, action) => {
 
 			return stateEditado;
 
-		// case actionsType.EDITAR:
-		// // console.log(action)
-		// let stateEditado = state.filter((x) => {
-		// 	if (x.id === action.alfajor.id) {
-		// 		console.log(x);
-		// 		x = action.alfajor;
+		case actionsType.BORRAR:
+		console.log(state)
+		let stateNuevo = state.filter((x) => (x.id == action.alfajor));
+		console.log(stateNuevo);
 
-		// 		console.log(x);
-		// 		return x;
-		// 	} else {
-		// 		return x;
-		// 	}
-		// });
-		// console.log(stateEditado);
-
-		// return stateEditado;
+		return stateNuevo;
 		default:
 			return state;
 	}

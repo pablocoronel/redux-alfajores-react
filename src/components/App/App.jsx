@@ -34,6 +34,7 @@ class App extends Component {
 		// console.log(this.props);
 		this.props.acciones.ejemploAction(uno);
 		this.props.acciones.editarAlfajor(dos);
+		this.props.acciones.borrarAlfajor(1)
 	}
 }
 

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { ejemploAction } from '../../actions/alfajorActions';
 
 class App extends Component {
 	constructor(props) {
@@ -9,6 +11,9 @@ class App extends Component {
 		this.state = {
 			titulo: 's'
 		};
+
+		
+		// console.log(this.props)
 	}
 
 	render() {
@@ -17,17 +22,14 @@ class App extends Component {
 }
 
 // mapeo del state
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
 	return {
 		titulo: state.titulo
 	};
 };
-
-const mapDispatchToProps = (dispatch) => {
-	return {
-		actions: ''
-	};
-};
+const mapDispatchToProps = (dispatch) => ({
+	...bindActionCreators(ejemploAction, dispatch),
+})
 
 export default connect(
 	mapStateToProps,

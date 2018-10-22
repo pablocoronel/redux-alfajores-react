@@ -2,22 +2,31 @@ import React, { Component } from 'react';
 import './App.css';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { ejemploAction } from '../../actions/alfajorActions';
-
+import * as actions from '../../actions/alfajorActions';
+// console.log(...actions)
 class App extends Component {
 	constructor(props) {
 		super();
 
 		this.state = {
-			titulo: 's'
+			// titulo: 's'
 		};
 
-		
-		// console.log(this.props)
+		// this.props.acciones.ejemploAction(uno);
 	}
 
 	render() {
 		return <div className="inicio">{this.state.titulo}</div>;
+	}
+
+	componentDidMount() {
+		const uno = {
+			id: 1,
+			nombre: 'uno',
+			sabor: 'uno',
+			precio: 1
+		};
+		this.props.acciones.ejemploAction(uno);
 	}
 }
 
@@ -27,9 +36,13 @@ const mapStateToProps = (state, ownProps) => {
 		titulo: state.titulo
 	};
 };
-const mapDispatchToProps = (dispatch) => ({
-	...bindActionCreators(ejemploAction, dispatch),
-})
+const mapDispatchToProps = (dispatch) => {
+	return {
+		acciones: bindActionCreators({ ...actions }, dispatch)
+	};
+};
+
+// console.log(mapDispatchToProps)
 
 export default connect(
 	mapStateToProps,

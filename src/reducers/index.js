@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import { reducerEjemplo } from '../reducers/unReductor';
-
+import { unReductor } from '../reducers/unReductor';
+// console.log(unReductor())
 const rootReducer = combineReducers({
-	reducerEjemplo
+	redu: unReductor
 });
 
 export default rootReducer;

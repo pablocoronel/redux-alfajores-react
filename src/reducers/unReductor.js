@@ -1,11 +1,12 @@
 import * as actionsType from '../actions/actionTypes';
 import initialState from '../store/initialState';
-
-export const reducerEjemplo = (state = initialState.ejemplo, action) => {
-	console.log(action);
+// console.log(initialState.alfajor)
+export const unReductor = (state = initialState, action) => {
+	console.log(state);
 	switch (action.type) {
 		case actionsType.NUEVO:
-			return [...state, action.titulo];
+		return [...state, action.alfajor];
+		// return state;
 		default:
 			return state;
 	}

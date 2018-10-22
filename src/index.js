@@ -8,6 +8,7 @@ import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import initialState from './store/initialState';
 import rootReducer from './reducers';
+
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 // configuracion del store

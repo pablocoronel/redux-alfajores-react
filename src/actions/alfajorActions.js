@@ -10,4 +10,7 @@ export const ejemploAction = (uno) => {
 	};
 };
 
-// console.log(ejemploAction)
+export const editarAlfajor = (alfajor) => ({
+	type: actionTypes.EDITAR,
+	alfajor
+})

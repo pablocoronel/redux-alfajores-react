@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as actions from '../../actions/alfajorActions';
+import * as actionCreators from '../../actions/alfajorActions';
 // console.log(...actions)
 class App extends Component {
 	constructor(props) {
@@ -11,8 +11,6 @@ class App extends Component {
 		this.state = {
 			// titulo: 's'
 		};
-
-		// this.props.acciones.ejemploAction(uno);
 	}
 
 	render() {
@@ -22,11 +20,20 @@ class App extends Component {
 	componentDidMount() {
 		const uno = {
 			id: 1,
-			nombre: 'uno',
-			sabor: 'uno',
+			nombre: 'AGREGADO',
+			sabor: 'leche',
 			precio: 1
 		};
+
+		const dos = {
+			id: 2,
+			nombre: 'EDITADO',
+			sabor: 'negro',
+			precio: 30
+		};
+		// console.log(this.props);
 		this.props.acciones.ejemploAction(uno);
+		this.props.acciones.editarAlfajor(dos);
 	}
 }
 
@@ -36,13 +43,18 @@ const mapStateToProps = (state, ownProps) => {
 		titulo: state.titulo
 	};
 };
+
 const mapDispatchToProps = (dispatch) => {
 	return {
-		acciones: bindActionCreators({ ...actions }, dispatch)
+		acciones: { ...bindActionCreators(actionCreators, dispatch) }
 	};
 };
 
-// console.log(mapDispatchToProps)
+// const mapDispatchToProps = (dispatch) => {
+// 	return {
+// 		acciones: bindActionCreators({ ...actionCreators }, dispatch)
+// 	};
+// };
 
 export default connect(
 	mapStateToProps,

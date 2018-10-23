@@ -1,7 +1,7 @@
 import * as actionsType from '../actions/actionTypes';
 import initialState from '../store/initialState';
 // console.log(initialState.alfajor)
-export const unReductor = (state = initialState.redu, action) => {
+export const alfajorReducer = (state = initialState.alfajor, action) => {
 	switch (action.type) {
 		case actionsType.NUEVO:
 			return [...state, action.alfajor];
@@ -22,7 +22,7 @@ export const unReductor = (state = initialState.redu, action) => {
 
 		case actionsType.BORRAR:
 		console.log(state)
-		let stateNuevo = state.filter((x) => (x.id == action.alfajor));
+		let stateNuevo = state.filter((x) => (x.id === action.alfajor));
 		console.log(stateNuevo);
 
 		return stateNuevo;

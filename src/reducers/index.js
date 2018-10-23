@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import { unReductor } from '../reducers/unReductor';
+import { alfajorReducer } from '../reducers/alfajorReducer';
 // console.log(unReductor())
 const rootReducer = combineReducers({
-	redu: unReductor
+	alfajor: alfajorReducer
 });
 
 export default rootReducer;

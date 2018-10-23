@@ -1,5 +1,5 @@
 export default {
-	redu: [
+	alfajor: [
 		{
 			id: 1,
 			nombre: 'guaymallen',

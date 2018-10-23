@@ -1,21 +1,21 @@
 import * as actionTypes from '../actions/actionTypes';
 
-export const ejemploAction = (uno) => {
+export const agregarAction = (uno) => {
 	// console.log(uno)
 	return (dispatch) => {
 		dispatch({
-			type: actionTypes.NUEVO,
+			type: actionTypes.ADD_ALFAJOR,
 			alfajor: uno
 		});
 	};
 };
 
 export const editarAlfajor = (alfajor) => ({
-	type: actionTypes.EDITAR,
+	type: actionTypes.EDIT_ALFAJOR,
 	alfajor
 });
 
 export const borrarAlfajor = (alfajor) => ({
-	type: actionTypes.BORRAR,
+	type: actionTypes.DELETE_ALFAJOR,
 	alfajor
 });

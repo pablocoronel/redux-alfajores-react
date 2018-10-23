@@ -1,3 +1,3 @@
-export const NUEVO = 'NUEVO';
-export const EDITAR = 'EDITAR';
-export const BORRAR = 'BORRAR';
+export const ADD_ALFAJOR = 'ADD_ALFAJOR';
+export const EDIT_ALFAJOR = 'EDIT_ALFAJOR';
+export const DELETE_ALFAJOR = 'DELETE_ALFAJOR';

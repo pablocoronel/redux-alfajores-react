@@ -32,9 +32,9 @@ class App extends Component {
 			precio: 30
 		};
 		// console.log(this.props);
-		this.props.acciones.ejemploAction(uno);
+		this.props.acciones.agregarAction(uno);
 		this.props.acciones.editarAlfajor(dos);
-		this.props.acciones.borrarAlfajor(1)
+		this.props.acciones.borrarAlfajor(1);
 	}
 }
 

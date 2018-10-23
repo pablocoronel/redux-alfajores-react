@@ -6,38 +6,18 @@ export const agregarAction = (nuevoAlfajor) => {
 	// console.log(nuevoAlfajor)
 	return (dispatch) => {
 		axios
-			.post('http://127.0.0.1:8000/alfajor', {
+			.post(URL_API + '/alfajor', {
 				nombre: nuevoAlfajor.nombre,
 				sabor: nuevoAlfajor.sabor,
 				precio: nuevoAlfajor.precio
 			})
 			.then((response) => {
-				console.log(response);
+				// console.log(response);
 			})
 			.catch((error) => {
-				console.log(error);
+				// console.log(error);
 			});
-
-		// fetch('http://127.0.0.1:8000/alfajor/', {
-		// 	method: 'post',
-		// 	headers: {
-		// 		Accept: 'application/json',
-		// 		'Content-Type': 'application/json'
-		// 	},
-		// 	body: JSON.stringify({
-		// 		nombre: nuevoAlfajor.nombre,
-		// 		sabor: nuevoAlfajor.sabor,
-		// 		precio: nuevoAlfajor.precio
-		// 	})
-		// })
-		// 	.then((response) => {
-		// 		dispatch({
-		// 			type: actionTypes.ADD_ALFAJOR,
-		// 			alfajor: nuevoAlfajor
-		// 		});
-		// 	})
-		// 	.catch((error) => console.log(error));
-
+			
 		// dispatch({
 		// 	type: actionTypes.ADD_ALFAJOR,
 		// 	alfajor: nuevoAlfajor

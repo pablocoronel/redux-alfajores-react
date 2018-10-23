@@ -18,9 +18,9 @@ export const alfajorReducer = (state = initialState.alfajor, action) => {
 			return stateEditado;
 
 		case actionsType.DELETE_ALFAJOR:
-			console.log(state);
+			// console.log(state);
 			let stateNuevo = state.filter((x) => x.id === action.alfajor);
-			console.log(stateNuevo);
+			// console.log(stateNuevo);
 
 			return stateNuevo;
 		default:

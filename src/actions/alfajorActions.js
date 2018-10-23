@@ -1,27 +1,23 @@
 import * as actionTypes from '../actions/actionTypes';
-import { URL_API } from '../store/config';
-import axios from 'axios';
+import API from '../store/config';
 
-export const agregarAction = (nuevoAlfajor) => {
-	// console.log(nuevoAlfajor)
+export const crearAlfajor = (nuevoAlfajor) => {
 	return (dispatch) => {
-		axios
-			.post(URL_API + '/alfajor', {
-				nombre: nuevoAlfajor.nombre,
-				sabor: nuevoAlfajor.sabor,
-				precio: nuevoAlfajor.precio
-			})
+		API.post('/alfajor', {
+			nombre: nuevoAlfajor.nombre,
+			sabor: nuevoAlfajor.sabor,
+			precio: nuevoAlfajor.precio
+		})
 			.then((response) => {
-				// console.log(response);
+				dispatch({
+					type: actionTypes.ADD_ALFAJOR,
+					// alfajor: response.data
+					alfajor: {...response.data, agregadoOk: true}
+				});
 			})
 			.catch((error) => {
-				// console.log(error);
+				console.log(error);
 			});
-			
-		// dispatch({
-		// 	type: actionTypes.ADD_ALFAJOR,
-		// 	alfajor: nuevoAlfajor
-		// });
 	};
 };
 

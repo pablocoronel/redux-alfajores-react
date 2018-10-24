@@ -9,14 +9,24 @@ export const crearAlfajor = (nuevoAlfajor) => {
 			precio: nuevoAlfajor.precio
 		})
 			.then((response) => {
+				// console.log(response);
 				dispatch({
 					type: actionTypes.ADD_ALFAJOR,
-					// alfajor: response.data
-					alfajor: {...response.data, agregadoOk: true}
+					alfajor: response.data
+				});
+				dispatch({
+					type: actionTypes.RESPONSE_SUCCESS,
+					response: { type: 'success', data: {} }
 				});
 			})
 			.catch((error) => {
-				console.log(error);
+				dispatch({
+					type: actionTypes.RESPONSE_ERROR,
+					response: {
+						type: 'error',
+						data: error.response.data
+					}
+				});
 			});
 	};
 };

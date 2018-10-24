@@ -4,18 +4,19 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import * as actionCreators from '../../actions/alfajorActions';
+import CartelAlert from '../CartelAlert/CartelAlert';
 import {
 	Form,
 	FormGroup,
-	ControlLabel,
+	// ControlLabel,
 	FormControl,
-	HelpBlock,
+	// HelpBlock,
 	Grid,
 	Row,
 	Col,
-	Table,
-	Button,
-	Alert
+	// Table,
+	Button
+	// Alert
 } from 'react-bootstrap';
 
 class App extends Component {
@@ -31,7 +32,7 @@ class App extends Component {
 			nombre: '',
 			sabor: '',
 			precio: 0,
-			agregadoOk: false
+			showCompo: false
 		};
 	}
 
@@ -63,47 +64,32 @@ class App extends Component {
 		this.props.acciones.crearAlfajor(nuevoAlfajor);
 
 		// Borrar campos despues de guardar
+		// this.setState({
+		// 	nombre: '',
+		// 	sabor: '',
+		// 	precio: ''
+		// 	// agregadoOk: true
+		// });
+	};
+
+	showCompo = () => {
 		this.setState({
-			nombre: '',
-			sabor: '',
-			precio: ''
-			// agregadoOk: true
+			showCompo: true
 		});
 	};
 
-	componentDidMount() {
-		const uno = {
-			id: 1,
-			nombre: 'AGREGADO',
-			sabor: 'leche',
-			precio: 1
-		};
-
-		const dos = {
-			id: 2,
-			nombre: 'EDITADO',
-			sabor: 'negro',
-			precio: 30
-		};
-
-		// this.props.acciones.crearAlfajor(uno);
-		// this.props.acciones.editarAlfajor(dos);
-		// this.props.acciones.borrarAlfajor(1);
+	componentDidUpdate() {
+		if (this.state.showCompo === false) {
+			this.showCompo();
+		}
 	}
 
 	render() {
-		console.log(this.props)
+		// console.log(this.props.response);
 		return (
 			<Grid>
-				<Row>
-					<Col xs={12}>Agregar</Col>
-				</Row>
-				<Row>
-					{this.props.agregadoOk === true ? 'test' : (
-						''
-					)}
-					<Col xs={12} />
-				</Row>
+				{this.state.showCompo ? <CartelAlert /> : ''}
+
 				<Row>
 					<Form horizontal>
 						<FormGroup>
@@ -173,14 +159,11 @@ class App extends Component {
 
 // mapeo del state
 const mapStateToProps = (state, ownProps) => {
-
-	console.log(state);
-
 	return {
-		nombre: state.nombre ? state.nombre: '',
-		sabor: state.sabor ? state.sabor: '',
-		precio: state.precio ? state.precio: 0,
-		agregadoOk: state.agregadoOk ? state.agregadoOk : false
+		nombre: state.nombre ? state.nombre : '',
+		sabor: state.sabor ? state.sabor : '',
+		precio: state.precio ? state.precio : 0,
+		response: state.response
 	};
 };
 
@@ -189,12 +172,6 @@ const mapDispatchToProps = (dispatch) => {
 		acciones: { ...bindActionCreators(actionCreators, dispatch) }
 	};
 };
-
-// const mapDispatchToProps = (dispatch) => {
-// 	return {
-// 		acciones: bindActionCreators({ ...actionCreators }, dispatch)
-// 	};
-// };
 
 export default connect(
 	mapStateToProps,

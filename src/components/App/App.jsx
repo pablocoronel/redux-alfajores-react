@@ -18,6 +18,7 @@ import {
 	Button
 	// Alert
 } from 'react-bootstrap';
+import { Object } from 'core-js';
 
 class App extends Component {
 	static propTypes = {
@@ -32,7 +33,7 @@ class App extends Component {
 			nombre: '',
 			sabor: '',
 			precio: 0,
-			showCompo: false
+			verAlert: false
 		};
 	}
 
@@ -72,23 +73,33 @@ class App extends Component {
 		// });
 	};
 
-	showCompo = () => {
+	verAlert = () => {
 		this.setState({
-			showCompo: true
+			verAlert: true
 		});
 	};
 
 	componentDidUpdate() {
-		if (this.state.showCompo === false) {
-			this.showCompo();
+		if (this.state.verAlert === false) {
+			this.verAlert();
 		}
 	}
 
 	render() {
-		// console.log(this.props.response);
 		return (
 			<Grid>
-				{this.state.showCompo ? <CartelAlert /> : ''}
+				<Row>
+					<Col xs={12} md={4} mdPush={6}>
+						Agregar
+					</Col>
+				</Row>
+
+				{this.state.verAlert &&
+				Object.keys(this.props.response).length > 0 ? (
+					<CartelAlert response={this.props.response} />
+				) : (
+					''
+				)}
 
 				<Row>
 					<Form horizontal>

@@ -1,4 +1,4 @@
 export default {
 	alfajor: [],
-	response: []
+	response: {}
 };

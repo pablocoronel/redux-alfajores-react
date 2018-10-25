@@ -1,87 +1,52 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import * as actionCreators from '../../actions/alfajorActions';
+import React from 'react';
 import { Row, Col, Alert } from 'react-bootstrap';
 
-class CartelAlert extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			styleMostrar: 'none',
-			titulo: '',
-			contenido: 'l',
-			styleAlert: 'info'
-		};
-	}
+const ListaMensaje = ({ data, type }) => {
+	const guardado = 'Guardado';
 
-	componentDidMount() {
-		let style = '';
-		if (this.props.response.type === 'success') {
-			style = 'success';
-		} else if (this.props.response.type === 'error') {
-			style = 'danger';
-		} else {
-			style = 'warning';
-		}
-		this.setState({
-			styleMostrar: 'block',
-			titulo: this.props.response.type,
-			contenido: 'algo 1',
-			styleAlert: style
-		});
-	}
-
-	shouldComponentUpdate(nextProps, nextState) {
-		return nextProps.response.type !== this.props.response.type;
-	}
-	componentWillUpdate(nextProps, nextState) {
-		let style = '';
-		if (this.props.response.type === 'success') {
-			style = 'success';
-		} else if (this.props.response.type === 'error') {
-			style = 'danger';
-		} else {
-			style = 'warning';
-		}
-		this.setState({
-			styleMostrar: 'block',
-			titulo: this.props.response.type,
-			contenido: 'algo 2',
-			styleAlert: style
-		});
-	}
-
-	render() {
-		// console.log(this.state);
-		return (
-			<div style={{ display: this.state.styleMostrar }}>
-				<Row>
-					<Col xs={12}>{this.state.titulo}</Col>
-				</Row>
-				<Row>
-					<Col xs={12}>
-						<Alert bsStyle={this.state.styleAlert}>
-							{this.state.contenido}
-						</Alert>
-					</Col>
-				</Row>
-			</div>
-		);
-	}
-}
-
-const mapStateToProps = (state, ownProps) => {
-	// console.log(state)
-	return { response: state.response };
+	return (
+		<div>
+			{type === 'success' ? (
+				<p>{guardado}</p>
+			) : (
+				Object.keys(data).map((item, index) =>
+					data[item].map((field, indexField) => (
+						<div key={field + '-' + indexField}>{field}</div>
+					))
+				)
+			)}
+		</div>
+	);
 };
 
-const mapDispatchToProps = (dispatch) => ({
-	// ...bindActionCreators(actionCreators, dispatch),
-	// return{};
-});
+const CartelAlert = ({ response }) => {
+	let styleAlert = 'info';
+	let type = response.type;
+	let data = response.data;
 
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps
-)(CartelAlert);
+	switch (type) {
+		case 'success':
+			styleAlert = 'success';
+			break;
+		case 'error':
+			styleAlert = 'danger';
+			break;
+		default:
+			styleAlert = 'info';
+			break;
+	}
+
+	return (
+		<div>
+			<Row>
+				<Col xs={12}>
+					<Alert bsStyle={styleAlert}>
+						<ListaMensaje data={data} type={type} />
+					</Alert>
+				</Col>
+			</Row>
+		</div>
+	);
+};
+
+export default CartelAlert;

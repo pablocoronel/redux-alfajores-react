@@ -158,7 +158,6 @@ class Formulario extends Component {
 
 // mapeo del state
 const mapStateToProps = (state, ownProps) => {
-
 	return {
 		nombre: state.nombre ? state.nombre : '',
 		sabor: state.sabor ? state.sabor : '',

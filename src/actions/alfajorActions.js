@@ -1,6 +1,19 @@
 import * as actionTypes from '../actions/actionTypes';
 import API from '../store/config';
 
+export const listarAlfajor = (alfajores) => {
+	return (dispatch) => {
+		API.get('/alfajor').then((response) => {
+			console.log(response);
+		});
+
+		dispatch({
+			type: actionTypes.ALL_ALFAJOR,
+			alfajores
+		});
+	};
+};
+
 export const crearAlfajor = (nuevoAlfajor) => {
 	return (dispatch) => {
 		API.post('/alfajor', {

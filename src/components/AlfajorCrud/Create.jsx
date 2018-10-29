@@ -15,7 +15,7 @@ import {
 } from 'react-bootstrap';
 import { Object } from 'core-js';
 
-class Formulario extends Component {
+class Create extends Component {
 	static propTypes = {
 		nombre: PropTypes.string.isRequired,
 		sabor: PropTypes.string.isRequired,
@@ -175,4 +175,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(Formulario);
+)(Create);

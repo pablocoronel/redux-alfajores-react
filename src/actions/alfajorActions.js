@@ -3,14 +3,23 @@ import API from '../store/config';
 
 export const listarAlfajor = (alfajores) => {
 	return (dispatch) => {
-		API.get('/alfajor').then((response) => {
-			console.log(response);
-		});
-
-		dispatch({
-			type: actionTypes.ALL_ALFAJOR,
-			alfajores
-		});
+		API.get('/alfajor')
+			.then((response) => {
+				dispatch({
+					type: actionTypes.ALL_ALFAJOR,
+					alfajores: response.data
+				});
+				dispatch({
+					type: actionTypes.RESPONSE_SUCCESS,
+					response: { type: 'success', data: {} }
+				});
+			})
+			.catch((error) => {
+				dispatch({
+					type: actionTypes.RESPONSE_ERROR,
+					response: { type: 'error', data: { error } }
+				});
+			});
 	};
 };
 
@@ -22,7 +31,6 @@ export const crearAlfajor = (nuevoAlfajor) => {
 			precio: nuevoAlfajor.precio
 		})
 			.then((response) => {
-				// console.log(response);
 				dispatch({
 					type: actionTypes.ADD_ALFAJOR,
 					alfajor: response.data
@@ -49,7 +57,23 @@ export const editarAlfajor = (alfajor) => ({
 	alfajor
 });
 
-export const borrarAlfajor = (alfajor) => ({
-	type: actionTypes.DELETE_ALFAJOR,
-	alfajor
-});
+export const borrarAlfajor = (alfajor) => {
+	return (dispatch) => {
+		API.delete('/alfajor/' + alfajor)
+			.then((response) => {
+				dispatch({
+					type: actionTypes.DELETE_ALFAJOR,
+					alfajor
+				});
+			})
+			.catch((error) => {
+				dispatch({
+					type: actionTypes.RESPONSE_ERROR,
+					response: {
+						type: 'error',
+						data: error
+					}
+				});
+			});
+	};
+};

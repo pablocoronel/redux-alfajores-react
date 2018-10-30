@@ -52,18 +52,41 @@ export const crearAlfajor = (nuevoAlfajor) => {
 	};
 };
 
+export const verAlfajor = (id) => {
+	return (dispatch) => {
+		API.get('/alfajor/' + id)
+			.then((response) => {
+				// console.log(response);
+				dispatch({
+					type: actionTypes.GET_ALFAJOR,
+					alfajor: response.data
+				});
+				dispatch({
+					type: actionTypes.RESPONSE_SUCCESS,
+					response: { type: 'success', data: {} }
+				});
+			})
+			.catch((error) => {
+				dispatch({
+					type: actionTypes.RESPONSE_ERROR,
+					response: { type: 'error', data: error }
+				});
+			});
+	};
+};
+
 export const editarAlfajor = (alfajor) => ({
 	type: actionTypes.EDIT_ALFAJOR,
 	alfajor
 });
 
-export const borrarAlfajor = (alfajor) => {
+export const borrarAlfajor = (id) => {
 	return (dispatch) => {
-		API.delete('/alfajor/' + alfajor)
+		API.delete('/alfajor/' + id)
 			.then((response) => {
 				dispatch({
 					type: actionTypes.DELETE_ALFAJOR,
-					alfajor
+					alfajor: id
 				});
 			})
 			.catch((error) => {

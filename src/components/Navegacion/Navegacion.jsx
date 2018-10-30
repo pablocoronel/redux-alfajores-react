@@ -1,6 +1,7 @@
 import React from 'react';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { LinkContainer } from 'react-router-bootstrap';
 
 const Navegacion = () => {
 	return (
@@ -12,12 +13,13 @@ const Navegacion = () => {
 					</Navbar.Brand>
 				</Navbar.Header>
 				<Nav>
-					<NavItem eventKey={1}>
-						<Link to="/crear">Crear</Link>
-					</NavItem>
-					<NavItem eventKey={2}>
-						<Link to="/editar">Editar</Link>
-					</NavItem>
+					<LinkContainer to="/crear">
+						<NavItem eventKey={1}>Crear</NavItem>
+					</LinkContainer>
+
+					<LinkContainer to="/editar">
+						<NavItem eventKey={2}>Editar</NavItem>
+					</LinkContainer>
 				</Nav>
 			</Navbar>
 		</div>

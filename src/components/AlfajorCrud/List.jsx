@@ -16,7 +16,12 @@ class List extends Component {
 	}
 
 	componentDidMount() {
-		this.props.acciones.listarAlfajor();
+		if (
+			typeof this.props.listaAlfajores === 'undefined' ||
+			this.props.listaAlfajores.length === 0
+		) {
+			this.props.acciones.listarAlfajor();
+		}
 	}
 
 	borrarAlfajor = (id) => {
@@ -38,14 +43,21 @@ class List extends Component {
 						</tr>
 					</thead>
 					<tbody>
-						{this.props.listaAlfajores.map((item, index) => (
+						{console.log(this.props)}
+						{
+							this.props.listaAlfajores.map((item, index) => (
 							<tr key={index + '-' + item}>
 								<td>{item.id}</td>
 								<td>{item.nombre}</td>
 								<td>{item.sabor}</td>
 								<td>{item.precio}</td>
 								<td>
-									<Link to={'/editar/' + item.id}>
+									<Link
+										to={{
+											pathname: '/editar/' + item.id,
+											alfajor: item
+										}}
+									>
 										Editar
 									</Link>
 								</td>

@@ -82,8 +82,11 @@ class Edit extends Component {
 			});
 		}
 
-		if (this.state.verAlert === false) {
-			this.verAlert();
+		// console.log(prevProps)
+		if (prevProps.response.type === 'success') {
+			if (this.state.verAlert === false) {
+				this.verAlert();
+			}
 		}
 	}
 
@@ -177,11 +180,11 @@ class Edit extends Component {
 
 // mapeo del state
 const mapStateToProps = (state, ownProps) => {
-	// console.log(ownProps);
+	// console.log(state)
 	return {
-		alfajor_item:
-			state.alfajor !== {}
-				? state.alfajor
+		alfajor:
+			state.alfajor.length > 0
+				? state.alfajor[0]
 				: { nombre: '', sabor: '', precio: 0 },
 		response: state.response
 	};

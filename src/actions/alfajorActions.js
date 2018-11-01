@@ -3,6 +3,11 @@ import API from '../store/config';
 
 export const listarAlfajor = (alfajores) => {
 	return (dispatch) => {
+		// dispatch({
+		// 	type: actionTypes.RESPONSE_EMPTY,
+		// 	response: { type: 'empty', data: {} }
+		// });
+
 		API.get('/alfajor')
 			.then((response) => {
 				dispatch({
@@ -25,6 +30,11 @@ export const listarAlfajor = (alfajores) => {
 
 export const crearAlfajor = (nuevoAlfajor) => {
 	return (dispatch) => {
+		// dispatch({
+		// 	type: actionTypes.RESPONSE_EMPTY,
+		// 	response: { type: 'empty', data: {} }
+		// });
+
 		API.post('/alfajor', {
 			nombre: nuevoAlfajor.nombre,
 			sabor: nuevoAlfajor.sabor,
@@ -54,9 +64,13 @@ export const crearAlfajor = (nuevoAlfajor) => {
 
 export const verAlfajor = (id) => {
 	return (dispatch) => {
+		// dispatch({
+		// 	type: actionTypes.RESPONSE_EMPTY,
+		// 	response: { type: 'empty', data: {} }
+		// });
+
 		API.get('/alfajor/' + id)
 			.then((response) => {
-				// console.log(response);
 				dispatch({
 					type: actionTypes.GET_ALFAJOR,
 					alfajor: response.data
@@ -82,6 +96,11 @@ export const editarAlfajor = (alfajor) => ({
 
 export const borrarAlfajor = (id) => {
 	return (dispatch) => {
+		// dispatch({
+		// 	type: actionTypes.RESPONSE_EMPTY,
+		// 	response: { type: 'empty', data: {} }
+		// });
+
 		API.delete('/alfajor/' + id)
 			.then((response) => {
 				dispatch({

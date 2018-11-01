@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useRef } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
@@ -15,153 +15,164 @@ import {
 } from 'react-bootstrap';
 import { Object } from 'core-js';
 
-class Create extends Component {
-	static propTypes = {
-		nombre: PropTypes.string.isRequired,
-		sabor: PropTypes.string.isRequired,
-		precio: PropTypes.number.isRequired
+const Create = ({ alfajorProp, response, acciones }) => {
+	const inputRef = useRef();
+	const [alfajor, setAlfajor] = useState({
+		nombre: '',
+		sabor: '',
+		precio: 0
+	});
+
+	// const [nombre, setNombre] = useState('');
+	// const [sabor, setSabor] = useState('');
+	// const [precio, setPrecio] = useState(0);
+	const [flagAlert, setVerAlert] = useState(false);
+
+	const handleAlfajor = (event) => {
+		// console.log(inputRef.current.props.nombre);
+		setAlfajor({ ...alfajor, [event.target.name]: event.target.value });
+	};
+	console.log(alfajor);
+	// handleNombre = (event) => {
+	// this.setState({
+	// 	nombre: event.target.value
+	// });
+	// };
+
+	// handlePrecio = (event) => {
+	// 	this.setState({
+	// 		precio: event.target.value
+	// 	});
+	// };
+
+	// handleSabor = (event) => {
+	// 	this.setState({
+	// 		sabor: event.target.value
+	// 	});
+	// };
+
+	const agregarAlfajor = () => {
+		// const nuevoAlfajor = {
+		// 	nombre: this.state.nombre,
+		// 	sabor: this.state.sabor,
+		// 	precio: this.state.precio
+		// };
+
+		// useEffect(() => {
+			acciones.crearAlfajor(alfajor);
+		// }, []);
 	};
 
-	constructor(props) {
-		super();
+	// useEffect(()=>{
+	// 	if(){}
+	// }, [])
 
-		this.state = {
-			nombre: '',
-			sabor: '',
-			precio: 0,
-			verAlert: false
-		};
-	}
+	// const componentDidUpdate = () => {
+	// 	if (this.state.verAlert === false) {
+	// 		this.verAlert();
+	// 	}
+	// };
+	// console.log(alfajor.nombre)
+	return (
+		<Grid>
+			<Row>
+				<Col xs={12} md={4} mdPush={6}>
+					Agregar
+				</Col>
+			</Row>
 
-	handleNombre = (event) => {
-		this.setState({
-			nombre: event.target.value
-		});
-	};
+			{flagAlert && Object.keys(response).length > 0 ? (
+				<CartelAlert response={response} />
+			) : (
+				''
+			)}
 
-	handlePrecio = (event) => {
-		this.setState({
-			precio: event.target.value
-		});
-	};
+			<Row>
+				<Form horizontal>
+					<FormGroup>
+						<Col xs={2}>Nombre</Col>
+						<Col xs={10}>
+							<FormControl
+								type="text"
+								name={'nombre'}
+								placeholder="Nombre"
+								value={alfajor.nombre}
+								onChange={handleAlfajor}
+								// nombre={"nombre"}
+								// ref={inputRef}
+							/>
+						</Col>
+					</FormGroup>
 
-	handleSabor = (event) => {
-		this.setState({
-			sabor: event.target.value
-		});
-	};
+					<FormGroup>
+						<Col xs={2}>Sabor</Col>
+						<Col xs={10}>
+							<FormControl
+								name={'sabor'}
+								componentClass="select"
+								placeholder="Sabor"
+								value={alfajor.sabor}
+								onChange={handleAlfajor}
+							>
+								<option value="">Elegir</option>
+								<option value="chocolate blanco">
+									Chocolate blanco
+								</option>
+								<option value="chocolate negro">
+									Chocolate negro
+								</option>
+								<option value="fruta">Fruta</option>
+								<option value="dulce de leche">
+									Dulce de leche
+								</option>
+							</FormControl>
+						</Col>
+					</FormGroup>
 
-	agregarAlfajor = () => {
-		const nuevoAlfajor = {
-			nombre: this.state.nombre,
-			sabor: this.state.sabor,
-			precio: this.state.precio
-		};
+					<FormGroup>
+						<Col sm={2}>Precio</Col>
+						<Col sm={10}>
+							<FormControl
+								type="text"
+								name={'precio'}
+								placeholder="Precio"
+								value={alfajor.precio}
+								onChange={handleAlfajor}
+							/>
+						</Col>
+					</FormGroup>
 
-		this.props.acciones.crearAlfajor(nuevoAlfajor);
-	};
+					<FormGroup>
+						<Col smOffset={2} sm={10}>
+							<Button
+								type="button"
+								onClick={() => agregarAlfajor()}
+							>
+								Agregar
+							</Button>
+						</Col>
+					</FormGroup>
+				</Form>
+			</Row>
+		</Grid>
+	);
+};
 
-	verAlert = () => {
-		this.setState({
-			verAlert: true
-		});
-	};
-
-	componentDidUpdate() {
-		if (this.state.verAlert === false) {
-			this.verAlert();
-		}
-	}
-
-	render() {
-		return (
-			<Grid>
-				<Row>
-					<Col xs={12} md={4} mdPush={6}>
-						Agregar
-					</Col>
-				</Row>
-
-				{this.state.verAlert &&
-				Object.keys(this.props.response).length > 0 ? (
-					<CartelAlert response={this.props.response} />
-				) : (
-					''
-				)}
-
-				<Row>
-					<Form horizontal>
-						<FormGroup>
-							<Col xs={2}>Nombre</Col>
-							<Col xs={10}>
-								<FormControl
-									type="text"
-									placeholder="Nombre"
-									value={this.state.nombre}
-									onChange={this.handleNombre}
-								/>
-							</Col>
-						</FormGroup>
-
-						<FormGroup>
-							<Col xs={2}>Sabor</Col>
-							<Col xs={10}>
-								<FormControl
-									componentClass="select"
-									placeholder="Sabor"
-									value={this.state.sabor}
-									onChange={this.handleSabor}
-								>
-									<option value="">Elegir</option>
-									<option value="chocolate blanco">
-										Chocolate blanco
-									</option>
-									<option value="chocolate negro">
-										Chocolate negro
-									</option>
-									<option value="fruta">Fruta</option>
-									<option value="dulce de leche">
-										Dulce de leche
-									</option>
-								</FormControl>
-							</Col>
-						</FormGroup>
-
-						<FormGroup>
-							<Col sm={2}>Precio</Col>
-							<Col sm={10}>
-								<FormControl
-									type="text"
-									placeholder="Precio"
-									value={this.state.precio}
-									onChange={this.handlePrecio}
-								/>
-							</Col>
-						</FormGroup>
-
-						<FormGroup>
-							<Col smOffset={2} sm={10}>
-								<Button
-									type="button"
-									onClick={this.agregarAlfajor}
-								>
-									Agregar
-								</Button>
-							</Col>
-						</FormGroup>
-					</Form>
-				</Row>
-			</Grid>
-		);
-	}
-}
+Create.propTypes = {
+	alfajorProp: PropTypes.oneOfType([PropTypes.array, PropTypes.object])
+		.isRequired
+	// nombre: PropTypes.string.isRequired,
+	// sabor: PropTypes.string.isRequired,
+	// precio: PropTypes.number.isRequired
+};
 
 // mapeo del state
 const mapStateToProps = (state, ownProps) => {
 	return {
-		nombre: state.nombre ? state.nombre : '',
-		sabor: state.sabor ? state.sabor : '',
-		precio: state.precio ? state.precio : 0,
+		alfajorProp:
+			state.alfajor.length > 0
+				? state.alfajor[0]
+				: { nombre: '', sabor: '', precio: 0 },
 		response: state.response
 	};
 };

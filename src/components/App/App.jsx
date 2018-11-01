@@ -4,13 +4,13 @@ import List from '../AlfajorCrud/List';
 import Create from '../AlfajorCrud/Create';
 import Edit from '../AlfajorCrud/Edit';
 import Error404 from '../Error404/Error404';
-import Navegacion from '../Navegacion/Navegacion';
+import Header from '../Header/Header';
 
 const App = () => {
 	return (
 		<Router>
 			<div>
-				<Navegacion />
+				<Header />
 				<Switch>
 					<Route path="/" exact component={List} />
 					<Route path="/crear" exact component={Create} />

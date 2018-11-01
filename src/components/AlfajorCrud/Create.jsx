@@ -23,49 +23,16 @@ const Create = ({ alfajorProp, response, acciones }) => {
 		precio: 0
 	});
 
-	// const [nombre, setNombre] = useState('');
-	// const [sabor, setSabor] = useState('');
-	// const [precio, setPrecio] = useState(0);
 	const [flagAlert, setVerAlert] = useState(false);
 
 	const handleAlfajor = (event) => {
 		// console.log(inputRef.current.props.nombre);
 		setAlfajor({ ...alfajor, [event.target.name]: event.target.value });
 	};
-	console.log(alfajor);
-	// handleNombre = (event) => {
-	// this.setState({
-	// 	nombre: event.target.value
-	// });
-	// };
-
-	// handlePrecio = (event) => {
-	// 	this.setState({
-	// 		precio: event.target.value
-	// 	});
-	// };
-
-	// handleSabor = (event) => {
-	// 	this.setState({
-	// 		sabor: event.target.value
-	// 	});
-	// };
 
 	const agregarAlfajor = () => {
-		// const nuevoAlfajor = {
-		// 	nombre: this.state.nombre,
-		// 	sabor: this.state.sabor,
-		// 	precio: this.state.precio
-		// };
-
-		// useEffect(() => {
-			acciones.crearAlfajor(alfajor);
-		// }, []);
+		acciones.crearAlfajor(alfajor);
 	};
-
-	// useEffect(()=>{
-	// 	if(){}
-	// }, [])
 
 	// const componentDidUpdate = () => {
 	// 	if (this.state.verAlert === false) {
@@ -80,12 +47,6 @@ const Create = ({ alfajorProp, response, acciones }) => {
 					Agregar
 				</Col>
 			</Row>
-
-			{flagAlert && Object.keys(response).length > 0 ? (
-				<CartelAlert response={response} />
-			) : (
-				''
-			)}
 
 			<Row>
 				<Form horizontal>
@@ -161,9 +122,6 @@ const Create = ({ alfajorProp, response, acciones }) => {
 Create.propTypes = {
 	alfajorProp: PropTypes.oneOfType([PropTypes.array, PropTypes.object])
 		.isRequired
-	// nombre: PropTypes.string.isRequired,
-	// sabor: PropTypes.string.isRequired,
-	// precio: PropTypes.number.isRequired
 };
 
 // mapeo del state

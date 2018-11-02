@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import * as actionCreators from '../../actions/alfajorActions';
-import CartelAlert from '../CartelAlert/CartelAlert';
 import {
 	Form,
 	FormGroup,
@@ -13,7 +12,6 @@ import {
 	Col,
 	Button
 } from 'react-bootstrap';
-import { Object } from 'core-js';
 
 const Create = ({ alfajorProp, response, acciones }) => {
 	const inputRef = useRef();
@@ -34,12 +32,6 @@ const Create = ({ alfajorProp, response, acciones }) => {
 		acciones.crearAlfajor(alfajor);
 	};
 
-	// const componentDidUpdate = () => {
-	// 	if (this.state.verAlert === false) {
-	// 		this.verAlert();
-	// 	}
-	// };
-	// console.log(alfajor.nombre)
 	return (
 		<Grid>
 			<Row>

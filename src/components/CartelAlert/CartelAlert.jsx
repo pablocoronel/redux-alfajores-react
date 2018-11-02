@@ -23,9 +23,11 @@ const ListaMensaje = ({ data, type }) => {
 };
 
 const CartelAlert = ({ response }) => {
+	console.log(response)
 	let styleAlert = 'info';
 	let type = response.type;
 	let data = response.data;
+	let verAlert = response.verAlert;
 
 	switch (type) {
 		case 'success':
@@ -41,7 +43,7 @@ const CartelAlert = ({ response }) => {
 
 	return (
 		<div>
-			{Object.keys(response).length > 0 ? (
+			{verAlert === true && Object.keys(response).length > 0 ? (
 				<Row>
 					<Col xs={12}>
 						<Alert bsStyle={styleAlert}>
@@ -57,8 +59,10 @@ const CartelAlert = ({ response }) => {
 };
 
 const mapStateToProps = (state, ownProps) => {
+	console.log('2')
+	console.log(state)
 	return {
-		response: state.response
+		response: state.alfajor
 	};
 };
 

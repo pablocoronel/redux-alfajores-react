@@ -4,11 +4,16 @@ import initialState from '../store/initialState';
 export const alfajorReducer = (state = initialState.alfajor, action) => {
 	switch (action.type) {
 		case actionsType.ALL_ALFAJOR:
-			let nuevoState = action.alfajores;
-			return nuevoState;
-
+		let nuevoState = action.alfajores;
+		return nuevoState;
+		
 		case actionsType.ADD_ALFAJOR:
-			return [...state, action.alfajor];
+		return [...state, action.alfajor];
+		
+		case actionsType.ADD_ALFAJOR_ERROR:
+		// console.log('aca')
+		// console.log(action)
+			return [...state, action.response]
 
 		case actionsType.GET_ALFAJOR:
 			return [...state, action.alfajor];

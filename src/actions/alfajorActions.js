@@ -87,6 +87,7 @@ export const verAlfajor = (id) => {
 	return (dispatch) => {
 		API.get('/alfajor/' + id)
 			.then((response) => {
+				// console.log(response)
 				dispatch({
 					type: actionTypes.GET_ALFAJOR,
 					alfajor: response.data

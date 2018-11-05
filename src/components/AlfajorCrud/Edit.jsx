@@ -183,8 +183,8 @@ const mapStateToProps = (state, ownProps) => {
 	// console.log(state)
 	return {
 		alfajor:
-			state.alfajor.length > 0
-				? state.alfajor[0]
+			state.alfajor.data.length > 0
+				? state.alfajor.data[0]
 				: { nombre: '', sabor: '', precio: 0 },
 		response: state.response
 	};

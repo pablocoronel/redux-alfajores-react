@@ -1,4 +1,7 @@
 export default {
-	alfajor: [],
+	alfajor: {
+		data: [],
+		response: {}
+	},
 	response: {}
 };

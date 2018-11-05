@@ -120,8 +120,8 @@ Create.propTypes = {
 const mapStateToProps = (state, ownProps) => {
 	return {
 		alfajorProp:
-			state.alfajor.length > 0
-				? state.alfajor[0]
+			state.alfajor.data.length > 0
+				? state.alfajor.data[0]
 				: { nombre: '', sabor: '', precio: 0 },
 		response: state.response
 	};

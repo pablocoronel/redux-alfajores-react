@@ -25,9 +25,7 @@ const App = () => {
 	);
 };
 
-const mapStateToProps = (state, ownProps) => ({
-	verAlert: state
-});
+const mapStateToProps = (state, ownProps) => ({});
 
 const mapDispatchToProps = (dispatch) => ({
 	acciones: { ...bindActionCreators(actionCreators, dispatch) }

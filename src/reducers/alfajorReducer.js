@@ -4,19 +4,16 @@ import initialState from '../store/initialState';
 export const alfajorReducer = (state = initialState.alfajor, action) => {
 	switch (action.type) {
 		case actionsType.ALL_ALFAJOR:
-		let nuevoState = action.alfajores;
-		return nuevoState;
-		
+			return {...state, data : action.alfajores, response: action.response};
+
 		case actionsType.ADD_ALFAJOR:
-		return [...state, action.alfajor];
-		
+			return {...state, response: action.response};
+
 		case actionsType.ADD_ALFAJOR_ERROR:
-		// console.log('aca')
-		// console.log(action)
-			return [...state, action.response]
+			return {...state, response: action.response};
 
 		case actionsType.GET_ALFAJOR:
-			return [...state, action.alfajor];
+			return {...state, data: action.alfajor};
 
 		// case actionsType.EDIT_ALFAJOR:
 		// 	let stateEditado = state.map((item, index) => {
@@ -30,9 +27,9 @@ export const alfajorReducer = (state = initialState.alfajor, action) => {
 		// 	return stateEditado;
 
 		case actionsType.DELETE_ALFAJOR:
-			let stateNuevo = state.filter((x) => x.id !== action.alfajor);
+			let data_nueva = state.data.filter((x) => x.id !== action.alfajor_id);
 
-			return stateNuevo;
+			return {...state, data: data_nueva};
 		default:
 			return state;
 	}

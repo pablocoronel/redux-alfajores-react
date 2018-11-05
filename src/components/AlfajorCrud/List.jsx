@@ -69,7 +69,7 @@ List.propTypes = {
 
 const mapStateToProps = (state, ownProps) => {
 	return {
-		listaAlfajores: state.alfajor
+		listaAlfajores: state.alfajor.data
 	};
 };
 

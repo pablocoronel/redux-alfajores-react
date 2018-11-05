@@ -7,24 +7,29 @@ export const listarAlfajor = (alfajores) => {
 			.then((response) => {
 				dispatch({
 					type: actionTypes.ALL_ALFAJOR,
-					alfajores: response.data
+					alfajores: response.data,
+					response: {
+						type: 'success',
+						data: {},
+						verAlert: false
+					}
 				});
 				dispatch({
 					type: actionTypes.RESPONSE_SUCCESS,
 					response: {
 						type: 'success',
-						action: 'ALL_ALFAJOR',
-						data: {}
+						action: 'ALL_ALFAJOR'
 					}
 				});
 			})
 			.catch((error) => {
+				console.log(error);
+
 				dispatch({
 					type: actionTypes.RESPONSE_ERROR,
 					response: {
 						type: 'error',
-						action: 'ALL_ALFAJOR',
-						data: { error }
+						action: 'ALL_ALFAJOR'
 					}
 				});
 			});
@@ -42,35 +47,38 @@ export const crearAlfajor = (nuevoAlfajor) => {
 				dispatch({
 					type: actionTypes.ADD_ALFAJOR,
 					alfajor: response.data,
-					verAlert: true
+					response: {
+						type: 'success',
+						data: {},
+						verAlert: true
+					}
 				});
 				dispatch({
 					type: actionTypes.RESPONSE_SUCCESS,
 					response: {
 						type: 'success',
-						action: 'ADD_ALFAJOR',
-						data: {}
+						action: 'ADD_ALFAJOR'
 					}
 				});
 			})
 			.catch((error) => {
+				console.log(error);
+
 				dispatch({
 					type: actionTypes.ADD_ALFAJOR_ERROR,
 					response: {
 						type: 'error',
-						action: 'ADD_ALFAJOR',
 						data: error.response.data,
 						verAlert: true
 					}
 				});
-				// dispatch({
-				// 	type: actionTypes.RESPONSE_ERROR,
-				// 	response: {
-				// 		type: 'error',
-				// 		action: 'ADD_ALFAJOR',
-				// 		data: error.response.data
-				// 	}
-				// });
+				dispatch({
+					type: actionTypes.RESPONSE_ERROR,
+					response: {
+						type: 'error',
+						action: 'ADD_ALFAJOR'
+					}
+				});
 			});
 	};
 };
@@ -87,18 +95,18 @@ export const verAlfajor = (id) => {
 					type: actionTypes.RESPONSE_SUCCESS,
 					response: {
 						type: 'success',
-						action: 'GET_ALFAJOR',
-						data: {}
+						action: 'GET_ALFAJOR'
 					}
 				});
 			})
 			.catch((error) => {
+				console.log(error);
+
 				dispatch({
 					type: actionTypes.RESPONSE_ERROR,
 					response: {
 						type: 'error',
-						action: 'GET_ALFAJOR',
-						data: error
+						action: 'GET_ALFAJOR'
 					}
 				});
 			});
@@ -116,24 +124,24 @@ export const borrarAlfajor = (id) => {
 			.then((response) => {
 				dispatch({
 					type: actionTypes.DELETE_ALFAJOR,
-					alfajor: id
+					alfajor_id: id
 				});
 				dispatch({
 					type: actionTypes.RESPONSE_SUCCESS,
 					response: {
 						type: 'success',
-						action: 'DELETE_ALFAJOR',
-						data: {}
+						action: 'DELETE_ALFAJOR'
 					}
 				});
 			})
 			.catch((error) => {
+				console.log(error);
+
 				dispatch({
 					type: actionTypes.RESPONSE_ERROR,
 					response: {
 						type: 'error',
-						action: 'DELETE_ALFAJOR',
-						data: error
+						action: 'DELETE_ALFAJOR'
 					}
 				});
 			});

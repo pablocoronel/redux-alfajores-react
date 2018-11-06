@@ -17,9 +17,9 @@ const Navegacion = () => {
 						<NavItem eventKey={1}>Crear</NavItem>
 					</LinkContainer>
 
-					<LinkContainer to="/editar">
+					{/* <LinkContainer to="/editar">
 						<NavItem eventKey={2}>Editar</NavItem>
-					</LinkContainer>
+					</LinkContainer> */}
 				</Nav>
 			</Navbar>
 		</div>

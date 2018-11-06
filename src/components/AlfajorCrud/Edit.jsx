@@ -140,8 +140,6 @@ Edit.propTypes = {
 
 // mapeo del state
 const mapStateToProps = (state, ownProps) => {
-	// console.log(ownProps.location.alfajor)
-	// console.log(state.alfajor.data);
 	return {
 		idAlfajor: ownProps.match.params.id,
 		alfajorPorUrl:

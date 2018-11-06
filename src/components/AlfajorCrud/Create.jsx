@@ -21,8 +21,6 @@ const Create = ({ alfajorProp, response, acciones }) => {
 		precio: 0
 	});
 
-	const [flagAlert, setVerAlert] = useState(false);
-
 	const handleAlfajor = (event) => {
 		// console.log(inputRef.current.props.nombre);
 		setAlfajor({ ...alfajor, [event.target.name]: event.target.value });

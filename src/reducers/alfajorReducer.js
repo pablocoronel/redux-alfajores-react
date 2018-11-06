@@ -4,32 +4,47 @@ import initialState from '../store/initialState';
 export const alfajorReducer = (state = initialState.alfajor, action) => {
 	switch (action.type) {
 		case actionsType.ALL_ALFAJOR:
-			return {...state, data : action.alfajores, response: action.response};
+			return {
+				...state,
+				data: action.alfajores,
+				response: action.response
+			};
 
 		case actionsType.ADD_ALFAJOR:
-			return {...state, response: action.response};
+			return { ...state, response: action.response };
 
 		case actionsType.ADD_ALFAJOR_ERROR:
-			return {...state, response: action.response};
+			return { ...state, response: action.response };
 
 		case actionsType.GET_ALFAJOR:
-			return {...state, data: action.alfajor};
+			let alfajor = [];
+			alfajor.push(action.alfajor);
+			return { ...state, data: alfajor };
 
-		// case actionsType.EDIT_ALFAJOR:
-		// 	let stateEditado = state.map((item, index) => {
-		// 		if (item.id === action.alfajor.id) {
-		// 			return action.alfajor;
-		// 		} else {
-		// 			return item;
-		// 		}
-		// 	});
+		case actionsType.EDIT_ALFAJOR:
+			let listadoActualizado = state.data.map((item, index) => {
+				if (item.id === action.alfajor.id) {
+					return action.alfajor;
+				} else {
+					return item;
+				}
+			});
 
-		// 	return stateEditado;
+			return {
+				...state,
+				data: listadoActualizado,
+				response: action.response
+			};
+
+		case actionsType.EDIT_ALFAJOR_ERROR:
+			return { ...state, response: action.response };
 
 		case actionsType.DELETE_ALFAJOR:
-			let data_nueva = state.data.filter((x) => x.id !== action.alfajor_id);
+			let data_nueva = state.data.filter(
+				(x) => x.id !== action.alfajor_id
+			);
 
-			return {...state, data: data_nueva};
+			return { ...state, data: data_nueva };
 		default:
 			return state;
 	}

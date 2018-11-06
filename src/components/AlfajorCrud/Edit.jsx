@@ -13,176 +13,125 @@ import {
 	Button
 } from 'react-bootstrap';
 
-const Edit = ({alfajorProp, response, acciones, idAlfajor}) => {
-	// console.log(alfajorProp)
-	// constructor(props) {
-	// 	super(props);
+const Edit = ({
+	alfajorProp,
+	response,
+	acciones,
+	idAlfajor,
+	alfajorPorUrl
+}) => {
+	// state local
+	const [alfajor, setAlfajor] = useState({
+		nombre: '',
+		sabor: '',
+		precio: 0
+	});
 
-	// 	let alfajor_props;
+	// dispara el fetch
+	if (!alfajorPorUrl) {
+		useEffect(() => {
+			acciones.verAlfajor(idAlfajor);
+		}, []);
+	}
 
-	// 	if (
-	// 		typeof this.props.location.alfajor === 'undefined' ||
-	// 		this.props.location.alfajor.length === 0
-	// 	) {
-	// 		alfajor_props = { nombre: '', sabor: '', precio: 0 };
-	// 	} else {
-	// 		alfajor_props = props.location.alfajor;
-	// 	}
+	// actualiza el state local
+	useEffect(
+		() => {
+			setAlfajor(alfajorProp);
+		},
+		[alfajorProp]
+	);
 
-	// 	this.state = {
-	// 		alfajor: alfajor_props,
-	// 		verAlert: false
-	// 	};
-	// }
-
-	useEffect(()=>{
-		acciones.verAlfajor(idAlfajor)
-	}, [])
-
-	const [alfajor, setAlfajor] = useState(alfajorProp)
-
-	const handleAlfajor = (event) =>{
+	// mantiene actualizado el state local desde los inputs
+	const handleAlfajor = (event) => {
 		setAlfajor({
-			...alfajor, [event.target.name]: event.target.value
-		})
-	}
+			...alfajor,
+			[event.target.name]: event.target.value
+		});
+	};
 
-	const editarAlfajor = () =>{
-		// console.log(alfajor)
-		acciones.editarAlfajor(alfajor)
-	}
-	
-	// handleNombre = (event) => {
-	// 	this.setState({
-	// 		alfajor: { ...this.state.alfajor, nombre: event.target.value }
-	// 	});
-	// };
+	// guarda los cambios en bd
+	const editarAlfajor = () => {
+		acciones.editarAlfajor(alfajor);
+	};
 
-	// handlePrecio = (event) => {
-	// 	this.setState({
-	// 		precio: event.target.value
-	// 	});
-	// };
+	return (
+		<Grid>
+			<Row>
+				<Col xs={12} md={4} mdPush={6}>
+					Editar
+				</Col>
+			</Row>
 
-	// handleSabor = (event) => {
-	// 	this.setState({
-	// 		sabor: event.target.value
-	// 	});
-	// };
-
-	// verAlert = () => {
-	// 	this.setState({
-	// 		verAlert: true
-	// 	});
-	// };
-
-	// componentDidMount() {
-	// 	if (
-	// 		typeof this.props.location.alfajor === 'undefined' ||
-	// 		this.props.location.alfajor.length === 0
-	// 	) {
-	// 		let id = parseInt(this.props.match.params.id);
-
-	// 		this.props.acciones.verAlfajor(id);
-	// 	}
-	// }
-
-	// componentDidUpdate(prevProps, prevState) {
-	// 	if (prevProps.alfajor !== this.props.alfajor) {
-	// 		this.setState({
-	// 			alfajor: this.props.alfajor
-	// 		});
-	// 	}
-
-	// 	// console.log(prevProps)
-	// 	if (prevProps.response.type === 'success') {
-	// 		if (this.state.verAlert === false) {
-	// 			this.verAlert();
-	// 		}
-	// 	}
-	// }
-
-		return (
-			<Grid>
+			{alfajor ? (
 				<Row>
-					<Col xs={12} md={4} mdPush={6}>
-						Editar
-					</Col>
+					<Form horizontal>
+						<FormGroup>
+							<Col xs={2}>Nombre</Col>
+							<Col xs={10}>
+								<FormControl
+									type="text"
+									name="nombre"
+									placeholder="Nombre"
+									value={alfajor.nombre}
+									onChange={handleAlfajor}
+								/>
+							</Col>
+						</FormGroup>
+
+						<FormGroup>
+							<Col xs={2}>Sabor</Col>
+							<Col xs={10}>
+								<FormControl
+									componentClass="select"
+									name="sabor"
+									placeholder="Sabor"
+									value={alfajor.sabor}
+									onChange={handleAlfajor}
+								>
+									<option value="">Elegir</option>
+									<option value="chocolate blanco">
+										Chocolate blanco
+									</option>
+									<option value="chocolate negro">
+										Chocolate negro
+									</option>
+									<option value="fruta">Fruta</option>
+									<option value="dulce de leche">
+										Dulce de leche
+									</option>
+								</FormControl>
+							</Col>
+						</FormGroup>
+
+						<FormGroup>
+							<Col sm={2}>Precio</Col>
+							<Col sm={10}>
+								<FormControl
+									type="text"
+									name="precio"
+									placeholder="Precio"
+									value={alfajor.precio}
+									onChange={handleAlfajor}
+								/>
+							</Col>
+						</FormGroup>
+
+						<FormGroup>
+							<Col smOffset={2} sm={10}>
+								<Button type="button" onClick={editarAlfajor}>
+									Guardar cambios
+								</Button>
+							</Col>
+						</FormGroup>
+					</Form>
 				</Row>
-
-				{alfajor ? (
-					<Row>
-						<Form horizontal>
-							<FormGroup>
-								<Col xs={2}>Nombre</Col>
-								<Col xs={10}>
-									<FormControl
-										type="text"
-										name="nombre"
-										placeholder="Nombre"
-										value={alfajor.nombre}
-										onChange={handleAlfajor}
-									/>
-								</Col>
-							</FormGroup>
-
-							<FormGroup>
-								<Col xs={2}>Sabor</Col>
-								<Col xs={10}>
-									<FormControl
-										componentClass="select"
-										name="sabor"
-										placeholder="Sabor"
-										value={alfajor.sabor}
-										onChange={handleAlfajor}
-									>
-										<option value="">Elegir</option>
-										<option value="chocolate blanco">
-											Chocolate blanco
-										</option>
-										<option value="chocolate negro">
-											Chocolate negro
-										</option>
-										<option value="fruta">Fruta</option>
-										<option value="dulce de leche">
-											Dulce de leche
-										</option>
-									</FormControl>
-								</Col>
-							</FormGroup>
-
-							<FormGroup>
-								<Col sm={2}>Precio</Col>
-								<Col sm={10}>
-									<FormControl
-										type="text"
-										name="precio"
-										placeholder="Precio"
-										value={alfajor.precio}
-										onChange={handleAlfajor}
-									/>
-								</Col>
-							</FormGroup>
-
-							<FormGroup>
-								<Col smOffset={2} sm={10}>
-									<Button
-										type="button"
-										onClick={editarAlfajor}
-									>
-										Guardar cambios
-									</Button>
-								</Col>
-							</FormGroup>
-						</Form>
-					</Row>
-				) : (
-					''
-				)}
-			</Grid>
-		);
-	
-}
+			) : (
+				''
+			)}
+		</Grid>
+	);
+};
 
 Edit.propTypes = {
 	alfajorProp: PropTypes.oneOfType([PropTypes.array, PropTypes.object])
@@ -191,14 +140,18 @@ Edit.propTypes = {
 
 // mapeo del state
 const mapStateToProps = (state, ownProps) => {
-	console.log(ownProps)
-	// console.log(state)
+	// console.log(ownProps.location.alfajor)
+	// console.log(state.alfajor.data);
 	return {
 		idAlfajor: ownProps.match.params.id,
+		alfajorPorUrl:
+			typeof ownProps.location.alfajor === 'object' ? true : false,
 		alfajorProp:
-			state.alfajor.data.length > 0
-				? state.alfajor.data[0]
-				: { nombre: '', sabor: '', precio: 0 },
+			typeof ownProps.location.alfajor === 'object'
+				? ownProps.location.alfajor
+				: state.alfajor.data.length > 0
+					? state.alfajor.data[0]
+					: { nombre: '', sabor: '', precio: 0 },
 		response: state.response
 	};
 };

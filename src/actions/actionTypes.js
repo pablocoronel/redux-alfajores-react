@@ -1,6 +1,7 @@
 export const ADD_ALFAJOR = 'ADD_ALFAJOR';
 export const ADD_ALFAJOR_ERROR = 'ADD_ALFAJOR_ERROR';
 export const EDIT_ALFAJOR = 'EDIT_ALFAJOR';
+export const EDIT_ALFAJOR_ERROR = 'EDIT_ALFAJOR_ERROR';
 export const DELETE_ALFAJOR = 'DELETE_ALFAJOR';
 export const ALL_ALFAJOR = 'ALL_ALFAJOR';
 export const GET_ALFAJOR = 'GET_ALFAJOR';

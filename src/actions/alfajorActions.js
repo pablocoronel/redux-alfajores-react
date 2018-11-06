@@ -87,7 +87,6 @@ export const verAlfajor = (id) => {
 	return (dispatch) => {
 		API.get('/alfajor/' + id)
 			.then((response) => {
-				// console.log(response)
 				dispatch({
 					type: actionTypes.GET_ALFAJOR,
 					alfajor: response.data
@@ -114,10 +113,53 @@ export const verAlfajor = (id) => {
 	};
 };
 
-export const editarAlfajor = (alfajor) => ({
-	type: actionTypes.EDIT_ALFAJOR,
-	alfajor
-});
+export const editarAlfajor = (alfajor) => {
+	// console.log(alfajor);
+	return (dispatch) => {
+		API.put('/alfajor/' + alfajor.id, {
+			nombre: alfajor.nombre,
+			sabor: alfajor.sabor,
+			precio: alfajor.precio
+		})
+			.then((response) => {
+				dispatch({
+					type: actionTypes.EDIT_ALFAJOR,
+					alfajor: response.data,
+					response: {
+						type: 'success',
+						data: {},
+						verAlert: true
+					}
+				});
+				dispatch({
+					type: actionTypes.RESPONSE_SUCCESS,
+					response: {
+						type: 'success',
+						action: 'EDIT_ALFAJOR'
+					}
+				});
+			})
+			.catch((error) => {
+				console.log(error);
+
+				dispatch({
+					type: actionTypes.EDIT_ALFAJOR_ERROR,
+					response: {
+						type: 'error',
+						data: error.response.data,
+						verAlert: true
+					}
+				});
+				dispatch({
+					type: actionTypes.RESPONSE_ERROR,
+					response: {
+						type: 'error',
+						action: 'EDIT_ALFAJOR'
+					}
+				});
+			});
+	};
+};
 
 export const borrarAlfajor = (id) => {
 	return (dispatch) => {

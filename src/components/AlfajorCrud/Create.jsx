@@ -13,7 +13,7 @@ import {
 	Button
 } from 'react-bootstrap';
 
-const Create = ({ alfajorProp, response, acciones }) => {
+const Create = ({ alfajorProp, response, acciones, idioma }) => {
 	const inputRef = useRef();
 	const [alfajor, setAlfajor] = useState({
 		nombre: '',
@@ -34,14 +34,14 @@ const Create = ({ alfajorProp, response, acciones }) => {
 		<Grid>
 			<Row>
 				<Col xs={12} md={4} mdPush={6}>
-					Agregar
+					{idioma.crear}
 				</Col>
 			</Row>
 
 			<Row>
 				<Form horizontal>
 					<FormGroup>
-						<Col xs={2}>Nombre</Col>
+						<Col xs={2}>{idioma.nombre}</Col>
 						<Col xs={10}>
 							<FormControl
 								type="text"
@@ -56,7 +56,7 @@ const Create = ({ alfajorProp, response, acciones }) => {
 					</FormGroup>
 
 					<FormGroup>
-						<Col xs={2}>Sabor</Col>
+						<Col xs={2}>{idioma.sabor}</Col>
 						<Col xs={10}>
 							<FormControl
 								name={'sabor'}
@@ -81,7 +81,7 @@ const Create = ({ alfajorProp, response, acciones }) => {
 					</FormGroup>
 
 					<FormGroup>
-						<Col sm={2}>Precio</Col>
+						<Col sm={2}>{idioma.precio}</Col>
 						<Col sm={10}>
 							<FormControl
 								type="text"
@@ -99,7 +99,7 @@ const Create = ({ alfajorProp, response, acciones }) => {
 								type="button"
 								onClick={() => agregarAlfajor()}
 							>
-								Agregar
+								{idioma.agregar}
 							</Button>
 						</Col>
 					</FormGroup>
@@ -121,7 +121,8 @@ const mapStateToProps = (state, ownProps) => {
 			state.alfajor.data.length > 0
 				? state.alfajor.data[0]
 				: { nombre: '', sabor: '', precio: 0 },
-		response: state.response
+		response: state.response,
+		idioma: state.idioma
 	};
 };
 

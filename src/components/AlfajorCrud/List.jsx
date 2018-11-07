@@ -6,7 +6,7 @@ import * as actionCreators from '../../actions/alfajorActions';
 import { Table, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-const List = ({ listaAlfajores, acciones }) => {
+const List = ({ listaAlfajores, acciones, idioma }) => {
 	useEffect(() => {
 		acciones.listarAlfajor();
 	}, []);
@@ -21,11 +21,11 @@ const List = ({ listaAlfajores, acciones }) => {
 				<thead>
 					<tr>
 						<th>#</th>
-						<th>Nombre</th>
-						<th>Sabor</th>
-						<th>Precio</th>
-						<th>Editar</th>
-						<th>Borrar</th>
+						<th>{idioma.nombre}</th>
+						<th>{idioma.sabor}</th>
+						<th>{idioma.precio}</th>
+						<th>{idioma.editar}</th>
+						<th>{idioma.borrar}</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -42,7 +42,7 @@ const List = ({ listaAlfajores, acciones }) => {
 										alfajor: item
 									}}
 								>
-									Editar
+									{idioma.editar}
 								</Link>
 							</td>
 							<td>
@@ -52,7 +52,7 @@ const List = ({ listaAlfajores, acciones }) => {
 										borrarAlfajor(item.id);
 									}}
 								>
-									Borrar
+									{idioma.borrar}
 								</Button>
 							</td>
 						</tr>
@@ -69,7 +69,8 @@ List.propTypes = {
 
 const mapStateToProps = (state, ownProps) => {
 	return {
-		listaAlfajores: state.alfajor.data
+		listaAlfajores: state.alfajor.data,
+		idioma: state.idioma
 	};
 };
 

@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
 import { alfajorReducer } from '../reducers/alfajorReducer';
 import { responseReducer } from '../reducers/responseReducer';
-// console.log(unReductor())
+import { idiomaReducer } from '../reducers/idiomaReducer';
+
 const rootReducer = combineReducers({
 	alfajor: alfajorReducer,
-	response: responseReducer
+	response: responseReducer,
+	idioma: idiomaReducer
 });
 
 export default rootReducer;

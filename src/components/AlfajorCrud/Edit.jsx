@@ -18,7 +18,8 @@ const Edit = ({
 	response,
 	acciones,
 	idAlfajor,
-	alfajorPorUrl
+	alfajorPorUrl,
+	idioma
 }) => {
 	// state local
 	const [alfajor, setAlfajor] = useState({
@@ -59,7 +60,7 @@ const Edit = ({
 		<Grid>
 			<Row>
 				<Col xs={12} md={4} mdPush={6}>
-					Editar
+					{idioma.editar}
 				</Col>
 			</Row>
 
@@ -67,7 +68,7 @@ const Edit = ({
 				<Row>
 					<Form horizontal>
 						<FormGroup>
-							<Col xs={2}>Nombre</Col>
+							<Col xs={2}>{idioma.nombre}</Col>
 							<Col xs={10}>
 								<FormControl
 									type="text"
@@ -80,7 +81,7 @@ const Edit = ({
 						</FormGroup>
 
 						<FormGroup>
-							<Col xs={2}>Sabor</Col>
+							<Col xs={2}>{idioma.sabor}</Col>
 							<Col xs={10}>
 								<FormControl
 									componentClass="select"
@@ -105,7 +106,7 @@ const Edit = ({
 						</FormGroup>
 
 						<FormGroup>
-							<Col sm={2}>Precio</Col>
+							<Col sm={2}>{idioma.precio}</Col>
 							<Col sm={10}>
 								<FormControl
 									type="text"
@@ -120,7 +121,7 @@ const Edit = ({
 						<FormGroup>
 							<Col smOffset={2} sm={10}>
 								<Button type="button" onClick={editarAlfajor}>
-									Guardar cambios
+									{idioma.guardar}
 								</Button>
 							</Col>
 						</FormGroup>
@@ -150,7 +151,8 @@ const mapStateToProps = (state, ownProps) => {
 				: state.alfajor.data.length > 0
 					? state.alfajor.data[0]
 					: { nombre: '', sabor: '', precio: 0 },
-		response: state.response
+		response: state.response,
+		idioma: state.idioma
 	};
 };
 

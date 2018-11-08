@@ -45,6 +45,9 @@ export const alfajorReducer = (state = initialState.alfajor, action) => {
 			);
 
 			return { ...state, data: data_nueva };
+
+		// case actionsType.UPLOAD_IMAGE:
+				
 		default:
 			return state;
 	}

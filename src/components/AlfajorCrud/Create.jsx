@@ -10,7 +10,8 @@ import {
 	Grid,
 	Row,
 	Col,
-	Button
+	Button,
+	Image
 } from 'react-bootstrap';
 
 const Create = ({ alfajorProp, response, acciones, idioma }) => {
@@ -21,15 +22,25 @@ const Create = ({ alfajorProp, response, acciones, idioma }) => {
 		precio: 0
 	});
 
+	const [image, setImagen] = useState({});
+
 	const handleAlfajor = (event) => {
 		// console.log(inputRef.current.props.nombre);
 		setAlfajor({ ...alfajor, [event.target.name]: event.target.value });
 	};
 
+	const handleSubirImagen = (event) => {
+		const archivo = event.target.files[0];
+
+		setImagen(archivo);
+
+		acciones.subirImagen(image);
+	};
+
 	const agregarAlfajor = () => {
 		acciones.crearAlfajor(alfajor);
 	};
-
+	// {console.log(image)}
 	return (
 		<Grid>
 			<Row>
@@ -90,6 +101,20 @@ const Create = ({ alfajorProp, response, acciones, idioma }) => {
 								value={alfajor.precio}
 								onChange={handleAlfajor}
 							/>
+						</Col>
+					</FormGroup>
+					<FormGroup>
+						<Col sm={2}>{idioma.subir_imagen}</Col>
+						<Col sm={5}>
+							<FormControl
+								id="subirImagen"
+								name="subirImagen"
+								type="file"
+								onChange={handleSubirImagen}
+							/>
+							<Col sm={5}>
+								{/* <Image src={image.name} rounded /> */}
+							</Col>
 						</Col>
 					</FormGroup>
 

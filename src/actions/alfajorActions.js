@@ -190,3 +190,16 @@ export const borrarAlfajor = (id) => {
 			});
 	};
 };
+
+export const subirImagen = (imagen) => {
+	return (dispatch) => {
+		API.post('/imagenUpload', { imagen: imagen })
+			.then((response) => {
+				console.log(response);
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+		// dispatch({ type: actionType.UPLOAD_IMAGE, imagen });
+	};
+};

@@ -9,7 +9,8 @@ export default {
 		agregar: 'agregar',
 		editar: 'editar',
 		borrar: 'borrar',
-		guardar: 'guardar cambios'
+		guardar: 'guardar cambios',
+		subir_imagen: 'imagen',
 	},
 	en: {
 		inicio: 'home',
@@ -21,6 +22,7 @@ export default {
 		borrar: 'delete',
 		agregar: 'add',
 		editar: 'edit',
-		guardar: 'save changes'
+		guardar: 'save changes',
+		subir_imagen: 'image',
 	}
 };

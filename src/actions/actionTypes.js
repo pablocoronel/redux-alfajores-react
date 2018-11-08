@@ -10,3 +10,5 @@ export const RESPONSE_SUCCESS = 'RESPONSE_SUCCESS';
 export const RESPONSE_ERROR = 'RESPONSE_ERROR';
 
 export const IDIOMA_EDIT = 'IDIOMA_EDIT';
+
+export const UPLOAD_IMAGE = 'UPLOAD_IMAGE';

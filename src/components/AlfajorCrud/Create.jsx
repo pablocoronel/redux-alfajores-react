@@ -14,7 +14,6 @@ import {
 	Image
 } from 'react-bootstrap';
 import Dropzone from 'react-dropzone';
-import DropzoneComponent from 'react-dropzone-component';
 
 const Create = ({ alfajorProp, response, acciones, idioma }) => {
 	const inputRef = useRef();
@@ -24,34 +23,28 @@ const Create = ({ alfajorProp, response, acciones, idioma }) => {
 		precio: 0
 	});
 
-	const [image, setImagen] = useState({});
-	const [files, setFiles] = useState([]);
+	const [imagen, setImagen] = useState([]);
+	const [preview, setPreview] = useState([]);
 
 	const handleAlfajor = (event) => {
 		// console.log(inputRef.current.props.nombre);
 		setAlfajor({ ...alfajor, [event.target.name]: event.target.value });
 	};
 
-	const handleSubirImagen = (event) => {
-		const archivo = event.target.files[0];
-		setImagen(archivo);
-	};
-
 	const onDrop = (files) => {
-		let imagenes = files.map((file) => {
+		let imagen_preview = files.map((file) => {
 			return {
 				...file,
-				preview: URL.createObjectURL(file),
-				name: file.name
+				preview: URL.createObjectURL(file)
 			};
-
-			setFiles();
 		});
-		console.log(imagenes);
+
+		setPreview(imagen_preview);
+		setImagen(files);
 	};
 
 	const onCancel = () => {
-		setFiles([]);
+		setImagen([]);
 	};
 
 	const agregarAlfajor = () => {
@@ -60,16 +53,16 @@ const Create = ({ alfajorProp, response, acciones, idioma }) => {
 
 	useEffect(
 		() => {
-			if (files.length > 0) {
-				acciones.subirImagen(files);
+			if (imagen.length > 0) {
+				acciones.subirImagen(imagen);
 			}
 		},
-		[files]
+		[imagen]
 	);
 
 	useEffect(() => {
-		for (let i = files.length; i > 0; i--) {
-			const file = files[0];
+		for (let i = preview.length; i > 0; i--) {
+			const file = preview[0];
 			URL.revokeObjectURL(file.preview);
 		}
 	});
@@ -106,9 +99,9 @@ const Create = ({ alfajorProp, response, acciones, idioma }) => {
 		height: '100%'
 	};
 
-	const thumbs = files.map((file) => {
+	const thumbs = preview.map((file, index) => {
 		return (
-			<div style={thumb}>
+			<div style={thumb} key={'key' + index}>
 				<div style={thumbInner}>
 					<img src={file.preview} style={img} />
 				</div>
@@ -181,27 +174,21 @@ const Create = ({ alfajorProp, response, acciones, idioma }) => {
 					<FormGroup>
 						<Col sm={2}>{idioma.subir_imagen}</Col>
 						<Col sm={5}>
-							<Dropzone
-								onDrop={onDrop}
-								onFileDialogCancel={onCancel}
-							>
-								<p>Subir imágenes.</p>
+							<Dropzone accept="image/*" onDrop={onDrop}>
+								Subir imágenes
 							</Dropzone>
 
-							<aside>
+							<Col sm={5}>
 								<h2>Imágenes</h2>
 								<ul>
-									{files.map((f) => (
+									{imagen.map((f) => (
 										<li key={f.name}>
 											{f.name} - {f.size} bytes
 										</li>
 									))}
 								</ul>
-							</aside>
 
-							<aside style={thumbsContainer}>{thumbs}</aside>
-							<Col sm={5}>
-								{/* <Image src={image.name} rounded /> */}
+								<div style={thumbsContainer}>{thumbs}</div>
 							</Col>
 						</Col>
 					</FormGroup>

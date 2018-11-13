@@ -193,13 +193,29 @@ export const borrarAlfajor = (id) => {
 
 export const subirImagen = (imagen) => {
 	return (dispatch) => {
-		API.post('/imagenUpload', { imagen: imagen })
-			.then((response) => {
-				console.log(response);
-			})
-			.catch((error) => {
-				console.log(error);
-			});
+		// console.log(imagen)
+		// let img;
+		// for (var pair of imagen.entries()) {
+		// 	// console.log(pair[0] + ', ' + pair[1]);
+		// 	img = pair[1];
+		// }
+		// imagen.append()
+
+		// img = imagen;
+		// console.log(img.name)
+		// *************************************************
+
+		// API.post(
+		// 	'/imagenUpload',
+		// 	{ imagen: imagen },
+		// 	{ headers: { 'Content-Type': 'multipart/form-data' } }
+		// )
+		// 	.then((response) => {
+		// 		// console.log(response);
+		// 	})
+		// 	.catch((error) => {
+		// 		// console.log(error);
+		// 	});
 		// dispatch({ type: actionType.UPLOAD_IMAGE, imagen });
 	};
 };

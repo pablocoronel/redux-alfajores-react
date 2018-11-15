@@ -193,16 +193,24 @@ export const borrarAlfajor = (id) => {
 
 export const subirImagen = (imagen) => {
 	return (dispatch) => {
-		console.log(imagen)
+		console.log(imagen[0]);
 		// const formData = new FormData();
 		// const file = new Blob([imagen[0]], { type: 'image/png' });
-		
+
 		// formData.append('test', file, file.size);
-		
-		// // console.log(formData)
+
+		const data = new FormData();
+		data.append('file', imagen[0]);
+		data.append('filename', 'nombre');
+		console.log(data);
 		API.post(
 			'/imagenUpload',
-			{ imagen: imagen }
+			{
+				imagen: data,
+				headers: {
+					// 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+				}
+			}
 			// { headers: { 'Content-Type': 'multipart/form-data' } }
 		)
 			.then((response) => {

@@ -35,12 +35,23 @@ const Create = ({ alfajorProp, response, acciones, idioma }) => {
 		let imagen_preview = files.map((file) => {
 			return {
 				...file,
-				preview: URL.createObjectURL(file)
+				preview: URL.createObjectURL(file),
+				name: file.name,
+				size: file.size
 			};
 		});
 
 		setPreview(imagen_preview);
-		setImagen(files);
+		// setImagen(files);
+
+		let reader = new FileReader();
+		reader.onload = (e) => {
+			setImagen(e.target.result);
+		};
+
+		// files.map((f, index) => {
+		return reader.readAsDataURL(files[0]);
+		// });
 	};
 
 	const onCancel = () => {
@@ -181,7 +192,7 @@ const Create = ({ alfajorProp, response, acciones, idioma }) => {
 							<Col sm={5}>
 								<h2>Imágenes</h2>
 								<ul>
-									{imagen.map((f) => (
+									{preview.map((f) => (
 										<li key={f.name}>
 											{f.name} - {f.size} bytes
 										</li>

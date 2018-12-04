@@ -42,16 +42,7 @@ const Create = ({ alfajorProp, response, acciones, idioma }) => {
 		});
 
 		setPreview(imagen_preview);
-		// setImagen(files);
-
-		let reader = new FileReader();
-		reader.onload = (e) => {
-			setImagen(e.target.result);
-		};
-
-		// files.map((f, index) => {
-		return reader.readAsDataURL(files[0]);
-		// });
+		setImagen(files);
 	};
 
 	const onCancel = () => {

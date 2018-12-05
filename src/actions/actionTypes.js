@@ -12,3 +12,4 @@ export const RESPONSE_ERROR = 'RESPONSE_ERROR';
 export const IDIOMA_EDIT = 'IDIOMA_EDIT';
 
 export const UPLOAD_IMAGE = 'UPLOAD_IMAGE';
+export const KEEP_IMAGE = 'KEEP_IMAGE';

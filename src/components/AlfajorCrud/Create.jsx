@@ -15,7 +15,14 @@ import {
 } from 'react-bootstrap';
 import Dropzone from 'react-dropzone';
 
-const Create = ({ alfajorProp, response, acciones, idioma }) => {
+const Create = ({
+	alfajorProp,
+	imagen_temporal,
+	alfajor_response,
+	response,
+	acciones,
+	idioma
+}) => {
 	const inputRef = useRef();
 	const [alfajor, setAlfajor] = useState({
 		nombre: '',
@@ -30,6 +37,21 @@ const Create = ({ alfajorProp, response, acciones, idioma }) => {
 		// console.log(inputRef.current.props.nombre);
 		setAlfajor({ ...alfajor, [event.target.name]: event.target.value });
 	};
+
+	const agregarAlfajor = () => {
+		acciones.crearAlfajor(alfajor);
+		acciones.mantenerImagenEnStore(imagen);
+	};
+
+	// Subir imagenes si los datos se guardaron
+	useEffect(
+		() => {
+			if (alfajor_response.type == 'success') {
+				acciones.subirImagen(imagen_temporal, alfajor_response.data.id);
+			}
+		},
+		[alfajor_response.type]
+	);
 
 	const onDrop = (files) => {
 		let imagen_preview = files.map((file) => {
@@ -49,18 +71,15 @@ const Create = ({ alfajorProp, response, acciones, idioma }) => {
 		setImagen([]);
 	};
 
-	const agregarAlfajor = () => {
-		acciones.crearAlfajor(alfajor);
-	};
-
-	useEffect(
-		() => {
-			if (imagen.length > 0) {
-				acciones.subirImagen(imagen);
-			}
-		},
-		[imagen]
-	);
+	// Sube la imagen al seleccionarla
+	// useEffect(
+	// 	() => {
+	// 		if (imagen.length > 0) {
+	// 			acciones.subirImagen(imagen);
+	// 		}
+	// 	},
+	// 	[imagen]
+	// );
 
 	useEffect(() => {
 		for (let i = preview.length; i > 0; i--) {
@@ -223,6 +242,8 @@ const mapStateToProps = (state, ownProps) => {
 			state.alfajor.data.length > 0
 				? state.alfajor.data[0]
 				: { nombre: '', sabor: '', precio: 0 },
+		imagen_temporal: state.alfajor.imagen_temporal,
+		alfajor_response: state.alfajor.response,
 		response: state.response,
 		idioma: state.idioma
 	};

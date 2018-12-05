@@ -49,7 +49,7 @@ export const crearAlfajor = (nuevoAlfajor) => {
 					alfajor: response.data,
 					response: {
 						type: 'success',
-						data: {},
+						data: response.data,
 						verAlert: true
 					}
 				});
@@ -114,7 +114,6 @@ export const verAlfajor = (id) => {
 };
 
 export const editarAlfajor = (alfajor) => {
-	// console.log(alfajor);
 	return (dispatch) => {
 		API.put('/alfajor/' + alfajor.id, {
 			nombre: alfajor.nombre,
@@ -191,20 +190,25 @@ export const borrarAlfajor = (id) => {
 	};
 };
 
-export const subirImagen = (imagen) => {
+export const mantenerImagenEnStore = (imagen) => ({
+	type: actionTypes.KEEP_IMAGE,
+	imagen
+});
+
+export const subirImagen = (imagen, idAlfajor) => {
 	return (dispatch) => {
-		var blob = new Blob([imagen[0]], { type: 'image/jpg' });
 		var formData = new FormData();
-		formData.append('imagen', blob);
+		imagen.forEach((element) => {
+			var cada_img = new Blob([element]);
+			formData.append('imagen[]', cada_img);
+		});
+
+		formData.append('idAlfajor', idAlfajor);
 
 		API.post('/imagenUpload', formData)
-			.then((response) => {
-				console.log(response);
-			})
+			.then((response) => {})
 			.catch((error) => {
 				console.log(error);
 			});
-
-		// 	// dispatch({ type: actionType.UPLOAD_IMAGE, imagen });
 	};
 };

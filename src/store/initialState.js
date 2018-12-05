@@ -3,7 +3,8 @@ import textos from '../store/idiomaTextos';
 const store = {
 	alfajor: {
 		data: [],
-		response: {}
+		response: {},
+		imagen_temporal: []
 	},
 	response: {},
 	idioma: textos.es

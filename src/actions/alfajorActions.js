@@ -87,6 +87,7 @@ export const verAlfajor = (id) => {
 	return (dispatch) => {
 		API.get('/alfajor/' + id)
 			.then((response) => {
+				// console.log(response.data.id)
 				dispatch({
 					type: actionTypes.GET_ALFAJOR,
 					alfajor: response.data
@@ -211,4 +212,15 @@ export const subirImagen = (imagen, idAlfajor) => {
 				console.log(error);
 			});
 	};
+};
+
+export const verImagen = (idAlfajor) => {
+	API.get('getImagen/' + idAlfajor)
+		.then((response) => {
+			console.log(response);
+		})
+		.catch((error) => {
+			console.log(error);
+		});
+	// type: actionTypes.GET_IMAGE, idAlfajor;
 };

@@ -13,3 +13,4 @@ export const IDIOMA_EDIT = 'IDIOMA_EDIT';
 
 export const UPLOAD_IMAGE = 'UPLOAD_IMAGE';
 export const KEEP_IMAGE = 'KEEP_IMAGE';
+export const GET_IMAGE = 'GET_IMAGE';

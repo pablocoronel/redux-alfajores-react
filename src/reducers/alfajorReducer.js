@@ -49,8 +49,8 @@ export const alfajorReducer = (state = initialState.alfajor, action) => {
 		case actionsType.KEEP_IMAGE:
 			return { ...state, imagen_temporal: action.imagen };
 
-		// case actionsType.GET_IMAGE:
-		// 	return {...state, imagenes : action}
+		case actionsType.GET_IMAGE:
+			return { ...state, imagenes: action.imagenes };
 
 		default:
 			return state;

@@ -19,7 +19,8 @@ const Edit = ({
 	acciones,
 	idAlfajor,
 	alfajorPorUrl,
-	idioma
+	idioma,
+	imagenes
 }) => {
 	// state local
 	const [alfajor, setAlfajor] = useState({
@@ -33,6 +34,11 @@ const Edit = ({
 		useEffect(() => {
 			acciones.verAlfajor(idAlfajor);
 		}, []);
+	}
+
+	if (imagenes.length === 0) {
+		// agrega las imagenes (faltanban) al store
+		acciones.verImagen(idAlfajor);
 	}
 
 	// actualiza el state local
@@ -79,7 +85,6 @@ const Edit = ({
 								/>
 							</Col>
 						</FormGroup>
-
 						<FormGroup>
 							<Col xs={2}>{idioma.sabor}</Col>
 							<Col xs={10}>
@@ -104,7 +109,6 @@ const Edit = ({
 								</FormControl>
 							</Col>
 						</FormGroup>
-
 						<FormGroup>
 							<Col sm={2}>{idioma.precio}</Col>
 							<Col sm={10}>
@@ -115,6 +119,18 @@ const Edit = ({
 									value={alfajor.precio}
 									onChange={handleAlfajor}
 								/>
+							</Col>
+						</FormGroup>
+
+						<FormGroup>
+							<Col sm={2}>Imagenes</Col>
+							<Col sm={10}>
+								{imagenes.map((item, index) => (
+									<img
+										src={item.file_path}
+										key={index + '-' + item.file_path}
+									/>
+								))}
 							</Col>
 						</FormGroup>
 
@@ -149,10 +165,11 @@ const mapStateToProps = (state, ownProps) => {
 			typeof ownProps.location.alfajor === 'object'
 				? ownProps.location.alfajor
 				: state.alfajor.data.length > 0
-					? state.alfajor.data[0]
-					: { nombre: '', sabor: '', precio: 0 },
+				? state.alfajor.data[0]
+				: { nombre: '', sabor: '', precio: 0 },
 		response: state.response,
-		idioma: state.idioma
+		idioma: state.idioma,
+		imagenes: state.alfajor.imagenes ? state.alfajor.imagenes : []
 	};
 };
 

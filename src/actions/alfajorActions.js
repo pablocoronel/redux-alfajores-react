@@ -87,8 +87,7 @@ export const verAlfajor = (id) => {
 	return (dispatch) => {
 		API.get('/alfajor/' + id)
 			.then((response) => {
-				// const imagenes = verImagen(id);
-				// console.log(imagenes);
+				dispatch(verImagen(id));
 
 				dispatch({
 					type: actionTypes.GET_ALFAJOR,
@@ -103,8 +102,7 @@ export const verAlfajor = (id) => {
 				});
 			})
 			.catch((error) => {
-				console.log(error);
-
+				// console.log(error);
 				dispatch({
 					type: actionTypes.RESPONSE_ERROR,
 					response: {
@@ -217,12 +215,16 @@ export const subirImagen = (imagen, idAlfajor) => {
 };
 
 export const verImagen = (idAlfajor) => {
-	let a = API.get('getImage/' + idAlfajor)
-		.then((response) => {
-			console.log(response.data);
-			// throw response.data;
-		})
-		.catch((error) => {
-			console.log(error);
-		});
+	return (dispatch) => {
+		API.get('getImage/' + idAlfajor)
+			.then((response) => {
+				dispatch({
+					type: actionTypes.GET_IMAGE,
+					imagenes: response.data
+				});
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	};
 };

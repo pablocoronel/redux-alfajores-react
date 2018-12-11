@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import * as actionCreators from '../../actions/alfajorActions';
+import { API_baseURL } from '../../store/config';
 import {
 	Form,
 	FormGroup,
@@ -36,15 +37,11 @@ const Edit = ({
 		}, []);
 	}
 
-	if (imagenes.length === 0) {
-		// agrega las imagenes (faltanban) al store
-		acciones.verImagen(idAlfajor);
-	}
-
 	// actualiza el state local
 	useEffect(
 		() => {
 			setAlfajor(alfajorProp);
+			acciones.verImagen(idAlfajor);
 		},
 		[alfajorProp]
 	);
@@ -127,7 +124,7 @@ const Edit = ({
 							<Col sm={10}>
 								{imagenes.map((item, index) => (
 									<img
-										src={item.file_path}
+										src={API_baseURL + item.file_path}
 										key={index + '-' + item.file_path}
 									/>
 								))}

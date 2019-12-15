@@ -8,6 +8,7 @@ import Edit from '../AlfajorCrud/Edit';
 import Error404 from '../Error404/Error404';
 import Header from '../Header/Header';
 // import * as actionCreators from '../../actions/alfajorActions';
+import {router_baseURL} from '../../store/config';
 
 const App = () => {
 	return (
@@ -15,9 +16,9 @@ const App = () => {
 			<div>
 				<Header />
 				<Switch>
-					<Route path="/" exact component={List} />
-					<Route path="/crear" exact component={Create} />
-					<Route path="/editar/:id" exact component={Edit} />
+					<Route path={router_baseURL + "/"} exact component={List} />
+					<Route path={router_baseURL + "/crear"} exact component={Create} />
+					<Route path={router_baseURL + "/editar/:id"} exact component={Edit} />
 					<Route component={Error404} />
 				</Switch>
 			</div>
